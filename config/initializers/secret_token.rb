@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Lesstalkymoreshippy::Application.config.secret_key_base = 'd76510c5571970bb527920ed7f3ef0505a797a871bc68178790fd3b640f174ce44ee554facffad362a1994f391e664fb9693e34ebf8920409925d42ed85692e9'
+Lesstalkymoreshippy::Application.config.secret_key_base = 'ffacc620e68b90a7a536f8fc125e9187b368a7737964107ca8368b810699f19c58fedde6e358d0b953998f7385cb1eb634faffd8b3d57fe7d5200069fd5c8e2b'
