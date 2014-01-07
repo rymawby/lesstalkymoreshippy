@@ -56,11 +56,16 @@ describe User do
     before(:each) do 
       @user = FactoryGirl.create(:user)
       @user.add_role :creator
+
+      @project = FactoryGirl.create(:project)
     end
 
     it "should be able to create a project" do
       ability = Ability.new(@user)
-      ability.should be_able_to([:create, :update], Project.new(:user => user))
+
+      @project.update_attribute(:creator_id, @user.id)
+
+      ability.should be_able_to(:create, @project)
     end
 
   end
