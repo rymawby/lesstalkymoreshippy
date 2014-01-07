@@ -1,4 +1,6 @@
 require 'spec_helper'
+require 'cancan/matchers'
+
 
 describe User do
 
@@ -47,6 +49,20 @@ describe User do
     User.create!(@attr.merge(:email => upcased_email))
     user_with_duplicate_email = User.new(@attr)
     user_with_duplicate_email.should_not be_valid
+  end
+
+  describe "Creator" do
+
+    before(:each) do 
+      @user = FactoryGirl.create(:user)
+      @user.add_role :creator
+    end
+
+    it "should be able to create a project" do
+      ability = Ability.new(@user)
+      ability.should be_able_to([:create, :update], Project.new(:user => user))
+    end
+
   end
 
   describe "passwords" do
