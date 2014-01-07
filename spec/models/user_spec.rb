@@ -78,6 +78,26 @@ describe User do
 
       ability.should be_able_to(:create, @target)
     end
+  end
+
+  describe "Validator" do
+
+    before(:each) do 
+      @user = FactoryGirl.create(:user)
+      @user.add_role :validator
+
+      @project = FactoryGirl.create(:project)
+    end
+
+    it "should be able to validate a target" do
+      ability = Ability.new(@user)
+
+      @project.update_attribute(:validator_id, @user.id)
+      @target = FactoryGirl.create(:target)
+      @target.update_attribute(:project_id, @project.id)
+
+      ability.should be_able_to(:validate, @target)
+    end
 
   end
 

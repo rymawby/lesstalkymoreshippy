@@ -8,6 +8,8 @@ class Ability
     elsif user.has_role? :creator
         can :manage, Project
         can :manage, Target
+    elsif user.has_role? :validator
+        can :manage, Target
     end
     # Define abilities for the passed in user here. For example:
     #
