@@ -1,4 +1,6 @@
 Lesstalkymoreshippy::Application.routes.draw do
+  resources :targets
+
   resources :projects
 
   root :to => "home#index"

@@ -68,6 +68,17 @@ describe User do
       ability.should be_able_to(:create, @project)
     end
 
+
+    it "should be able to create a target" do
+      ability = Ability.new(@user)
+
+      @project.update_attribute(:creator_id, @user.id)
+      @target = FactoryGirl.create(:target)
+      @target.update_attribute(:project_id, @project.id)
+
+      ability.should be_able_to(:create, @target)
+    end
+
   end
 
   describe "passwords" do
