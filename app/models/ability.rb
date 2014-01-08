@@ -3,11 +3,14 @@ class Ability
 
   def initialize(user)
     user ||= User.new # guest user (not logged in)
+    alias_action :create, :read, :update, :destroy, :to => :crud
+
     if user.has_role? :admin
       can :manage, :all
     elsif user.has_role? :creator
-        can :manage, Project
-        can :manage, Target
+        can :crud, Project
+        can :crud, Target
+        cannot :validate, Target
     elsif user.has_role? :validator
         can :manage, Target
     end
