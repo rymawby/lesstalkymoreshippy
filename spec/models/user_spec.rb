@@ -78,6 +78,17 @@ describe User do
 
       ability.should be_able_to(:create, @target)
     end
+
+    it "should not be able to validate a target" do
+      @project.update_attribute(:validator_id, @user.id)
+      @target = FactoryGirl.create(:target)
+      @target.update_attribute(:project_id, @project.id)
+
+      @target.validate(@user)
+
+      @target.complete.should be_false
+    end
+
   end
 
   describe "Validator" do
@@ -97,6 +108,28 @@ describe User do
       @target.update_attribute(:project_id, @project.id)
 
       ability.should be_able_to(:validate, @target)
+
+      @target.validate(@user)
+
+      @target.complete.should be_true
+    end
+
+    it "should not be able to create a project" do
+      ability = Ability.new(@user)
+
+      @project.update_attribute(:validator_id, @user.id)
+
+      ability.should_not be_able_to(:create, @project)
+    end
+
+    it "should not be able to create a target" do
+      ability = Ability.new(@user)
+
+      @project.update_attribute(:validator_id, @user.id)
+      @target = FactoryGirl.create(:target)
+      @target.update_attribute(:project_id, @project.id)
+
+      ability.should_not be_able_to(:create, @target)
     end
 
   end

@@ -12,7 +12,8 @@ class Ability
         can :crud, Target
         cannot :validate, Target
     elsif user.has_role? :validator
-        can :manage, Target
+        can [:read, :update, :delete, :validate], Target
+        cannot :create, Target
     end
     # Define abilities for the passed in user here. For example:
     #
