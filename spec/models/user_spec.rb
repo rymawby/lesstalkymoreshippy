@@ -13,6 +13,9 @@ describe User do
     }
   end
 
+  it { should have_many(:projects) }
+  it {should have_many(:targets).through(:projects)}
+
   it "should create a new instance given a valid attribute" do
     User.create!(@attr)
   end
