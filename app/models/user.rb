@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   
-  has_many :projects
+  has_many :projects, foreign_key: 'creator_id'
+  has_many :projects, foreign_key: 'validator_id'
   has_many :targets, through: :projects
 
   rolify
