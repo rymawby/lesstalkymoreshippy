@@ -9,5 +9,10 @@ ready = ->
 	  $(this).before($(this).data('fields').replace(regexp, time))
 	  event.preventDefault()
 
+	$('form').on 'click', '.remove_fields', (event) ->
+	    $(this).prev('input[type=hidden]').val(true)
+	    $(this).closest('fieldset').hide()
+	    event.preventDefault()
+
 $(document).ready(ready)
 $(document).on('page:load', ready)
