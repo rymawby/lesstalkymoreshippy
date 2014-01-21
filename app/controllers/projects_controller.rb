@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = Project.where('creator_id = ? OR validator_id = ?', current_user, current_user)
   end
 
   # GET /projects/1
@@ -69,6 +69,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:creator_id, :validator_id, :title, :description)
+      params.require(:project).permit(:creator_id, :validator_id, :title, :description, targets_attributes: [:name, :target_date, :id])
     end
 end
