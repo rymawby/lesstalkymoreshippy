@@ -5,5 +5,8 @@ class Project < ActiveRecord::Base
 	has_many :targets, dependent: :destroy
 	accepts_nested_attributes_for :targets, allow_destroy: true
 	
+	def get_active_target
+		self.targets.order('target_date DESC').where(complete: true)
+	end	
 
 end

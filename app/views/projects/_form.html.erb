@@ -2,11 +2,10 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <input name="creator_id" type="hidden" value="<%= current_user.id %>" /> 
     <%= f.input :validator_id,  collection: User.with_role(:validator) %>
     <%= f.input :title %>
     <%= f.input :description %>
-
+    <%= f.hidden_field :creator_id, value: current_user.id %>
     <%= f.simple_fields_for :targets do |t| %>
       <%= render 'target_fields', targ: t %>   
     <% end %>

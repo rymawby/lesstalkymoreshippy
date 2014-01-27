@@ -7,5 +7,4 @@ class Target < ActiveRecord::Base
 			self.complete = true
 		end
 	end
-
 end

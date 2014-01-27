@@ -4,7 +4,11 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.where('creator_id = ? OR validator_id = ?', current_user, current_user)
+    if(current_user.has_role? 'validator')
+      @projects = Project.where('validator_id = ?', current_user)
+    elsif(current_user.has_role? 'creator')
+      @projects = Project.where('creator_id = ?', current_user)
+    end
   end
 
   # GET /projects/1
